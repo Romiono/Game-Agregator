@@ -15,15 +15,15 @@ const generateAccessToken = (id: any, roles: any) => {
 }
 
 class authController {
-    async registration(req :any, res :any) {
+    async registration(req: any, res: any) {
         try {
             const errors = validationResult(req);
-            if(!errors.isEmpty()) {
+            if (!errors.isEmpty()) {
                 return res.status(400).json({message: 'Ошибка при регистрации', errors})
             }
             const {username, password} = req.body;
             const candidate = await User.findOne({username});
-            if(candidate) {
+            if (candidate) {
                 return res.status(400).json({message: 'Пользователь с таким именем уже существует'});
             }
             const hashPassword = bcrypt.hashSync(password, 7);
@@ -32,36 +32,42 @@ class authController {
             await user.save();
             return res.json({message: "Пользователь успешно зарегистрован"});
 
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
             res.status(400).json({message: 'Registration error'});
         }
     }
-    async login(req :any, res :any) {
+
+    async login(req: any, res: any) {
         try {
             const {username, password} = req.body;
             const user = await User.findOne({username});
-            if(!user) {
+            if (!user) {
                 return res.status(400).json({message: `Пользователя ${username} не найден`});
             }
             const validPassword = bcrypt.compareSync(password, user.password);
-            if(!validPassword) {
+            if (!validPassword) {
                 return res.status(400).json({message: 'Login error'});
             }
             const token = generateAccessToken(user._id, user.roles);
-            res.status(200).json({token});
-        }
-        catch (e) {
+            res.status(200).json({
+                user: {
+                    id: user._id,
+                    username,
+                    roles: user.roles,
+                    token
+                }
+            });
+        } catch (e) {
             console.log(e);
             res.status(400).json({message: 'Login error'});
         }
     }
-    async getUsers(req :any, res :any) {
+
+    async getUsers(req: any, res: any) {
         try {
             res.json('server work')
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e);
             res.status(400).json({message: 'get users error'});
         }

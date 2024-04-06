@@ -1,17 +1,17 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 
-interface UserSlice {
+export interface UserSlice {
     id: string | null,
-    name: string | null,
-    password: string | null,
+    username: string | null,
+    roles: string[] | null,
     token: string | null,
     isAuth: boolean
 }
 
 const initialState: UserSlice = {
     id: null,
-    name: null,
-    password: null,
+    username: null,
+    roles: [],
     token: null,
     isAuth: false
 }
@@ -20,11 +20,19 @@ const UserSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        login: (state) => {
-            return state;
+        login: (state, action: PayloadAction<UserSlice>) => {
+            state.username = action.payload.username;
+            state.id = action.payload.id;
+            state.roles = action.payload.roles;
+            state.token = action.payload.token;
+            state.isAuth = true;
         },
         logout: (state) => {
-            return state;
+            state.username = null;
+            state.id = null;
+            state.roles = null;
+            state.token = null;
+            state.isAuth = false;
         }
     }
 });

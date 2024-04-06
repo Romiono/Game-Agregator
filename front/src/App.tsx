@@ -1,12 +1,14 @@
 import './App.css'
 import './index.css'
 import {Link, Outlet} from "react-router-dom";
+import {useAppSelector} from "./hooks/reduxHooks.ts";
 
 function App() {
+    const {isAuth} = useAppSelector(state => state.user)
     return (
         <div className={"w-full h-full flex flex-col"}>
             <div className="navbar bg-base-100">
-                <div className="navbar-start">
+                <div className=" navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24"
@@ -26,10 +28,16 @@ function App() {
                 </div>
                 <div className="navbar-end hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                        <li><a>Item 1</a></li>
-                        <li><a>Item 3</a></li>
+                        {/*вставлять ссылки*/}
                     </ul>
-                    <Link to={'/login'} className="btn">Login</Link>
+                    {isAuth ?
+                        <ul className="menu menu-horizontal px-1 flex gap-3">
+                            <Link to={'/main'} className="font-bold text-xl">Main</Link>
+                            <Link to={'/profile'} className="font-bold text-xl">Profile</Link>
+                        </ul>
+                        :
+                        <Link to={'/login'} className="btn">Login</Link>
+                    }
                 </div>
             </div>
             <div className={'container mx-auto h-full'}>

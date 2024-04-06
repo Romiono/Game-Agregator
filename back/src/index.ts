@@ -2,13 +2,16 @@ import express, { Express } from "express";
 import dotenv from "dotenv";
 import mongoose from 'mongoose'
 import authRouter from './routers/authRouter'
+import {corsMiddleware} from "./cors.middleware";
 
 dotenv.config();
 
 const app: Express = express();
 const port = process.env.PORT || 3000;
 
+
 app.use(express.json());
+app.use(corsMiddleware);
 app.use('/auth', authRouter);
 
 

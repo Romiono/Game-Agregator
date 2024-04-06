@@ -9,15 +9,27 @@ import {
     RouterProvider,
 } from "react-router-dom";
 import AuthPage from "./Pages/AuthPage.tsx";
+import Main from "./Pages/Main.tsx";
+import Profile from "./Pages/Profile.tsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         element: <App/>,
-        children: [{
-            element: <AuthPage/>,
-            path: '/login',
-        }]
+        children: [
+            {
+                element: <AuthPage/>,
+                path: '/login',
+            },
+            {
+                element: <Main/>,
+                path: '/main',
+            },
+            {
+                element: <Profile/>,
+                path: '/profile',
+            },
+        ]
     },
 ]);
 
