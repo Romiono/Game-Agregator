@@ -1,10 +1,13 @@
-import axios from "axios";
+import axios, {AxiosError} from "axios";
 import authUser from "../models /authUser.ts";
+import {AppDispatch} from "../store/store.ts";
+import {pending, pendingIsError} from "../store/reducers/UserSlice.ts";
 
 
-export async function registerNewUser(user: authUser) {
+export const registerNewUser = (user: authUser) => async (dispatch: AppDispatch) => {
     try {
-        const data = await axios.post(
+        dispatch(pending());
+        await axios.post(
             'http://localhost:5027/auth/registration',
             user,
             {
@@ -12,9 +15,11 @@ export async function registerNewUser(user: authUser) {
                     'Content-Type': 'application/json'
                 }
             });
-        console.log(data)
-    } catch (e) {
+    } catch (e: AxiosError | any) {
         console.log(e)
+        dispatch(pendingIsError(e.message));
+    } finally {
+        dispatch(pending());
     }
 }
 

@@ -5,7 +5,9 @@ export interface UserSlice {
     username: string | null,
     roles: string[] | null,
     token: string | null,
-    isAuth: boolean
+    isAuth: boolean,
+    isLoading: boolean,
+    error: string,
 }
 
 const initialState: UserSlice = {
@@ -13,14 +15,23 @@ const initialState: UserSlice = {
     username: null,
     roles: [],
     token: null,
-    isAuth: false
+    isAuth: false,
+    isLoading: false,
+    error: '',
 }
 
 const UserSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
+        pendingIsError: (state, action: PayloadAction<string>) => {
+            state.error = action.payload;
+        },
+        pending: (state) => {
+            state.isLoading = !state.isLoading;
+        },
         login: (state, action: PayloadAction<UserSlice>) => {
+            state.error = '';
             state.username = action.payload.username;
             state.id = action.payload.id;
             state.roles = action.payload.roles;
@@ -33,10 +44,10 @@ const UserSlice = createSlice({
             state.roles = null;
             state.token = null;
             state.isAuth = false;
-        }
+        },
     }
 });
 
-export const {  logout, login } = UserSlice.actions
+export const {  logout, login, pending, pendingIsError } = UserSlice.actions
 
 export default UserSlice.reducer

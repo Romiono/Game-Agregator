@@ -1,7 +1,7 @@
 import express, { Express } from "express";
 import dotenv from "dotenv";
-import mongoose from 'mongoose'
-import authRouter from './routers/authRouter'
+import mongoose from 'mongoose';
+import authRouter from './routers/authRouter';
 import {corsMiddleware} from "./cors.middleware";
 
 dotenv.config();
@@ -21,8 +21,8 @@ const serverStart = async () => {
         app.listen(port, () => console.log(`[server]: Server is running at http://localhost:${port}`));
     }
     catch (e) {
-        console.log(e)
+        console.log(e);
     }
 }
 
-serverStart()
+serverStart();
