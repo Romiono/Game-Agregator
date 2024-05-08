@@ -1,10 +1,9 @@
 
 import React, {useState} from "react";
-import {registerNewUser} from "../auth/registerUser.ts";
-import {useAppDispatch, useAppSelector} from "../hooks/reduxHooks.ts";
-import {auth} from "../auth/authUser.ts";
+import {useAppDispatch, useAppSelector} from "../Hooks/reduxHooks.ts";
+import {AuthUser} from "../Api/auth/authUser.ts";
 import {useNavigate} from "react-router-dom";
-import Loader from "../componets /UI/Loader.tsx";
+import Loader from "../Componets/UI/Loader.tsx";
 
 const AuthPage = () => {
 
@@ -24,7 +23,7 @@ const AuthPage = () => {
 
     const userIsLogining =  (e: React.MouseEvent) => {
         e.preventDefault();
-        dispatch(auth(user));
+        dispatch(AuthUser.auth(user));
         if(isAuth) {
             navigate('/main');
         }
@@ -32,7 +31,7 @@ const AuthPage = () => {
 
     const userIsRegistar = (e: React.MouseEvent) => {
         e.preventDefault();
-        dispatch(registerNewUser(user));
+        dispatch(AuthUser.registerNewUser(user));
     }
     return (
         <div className={'w-full h-full flex justify-center items-center gap-3'}>

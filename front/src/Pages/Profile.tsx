@@ -1,4 +1,4 @@
-import {useAppSelector} from "../hooks/reduxHooks.ts";
+import {useAppSelector} from "../Hooks/reduxHooks.ts";
 
 const Profile = () => {
     const {id, username, token} = useAppSelector(state => state.user)

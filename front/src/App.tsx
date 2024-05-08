@@ -1,8 +1,8 @@
 import './App.css'
 import './index.css'
 import {Link, Outlet, useNavigate} from "react-router-dom";
-import {useAppDispatch, useAppSelector} from "./hooks/reduxHooks.ts";
-import {logout} from "./store/reducers/UserSlice.ts";
+import {useAppDispatch, useAppSelector} from "./Hooks/reduxHooks.ts";
+import {logout} from "./Store/reducers/UserSlice.ts";
 
 function App() {
     const {isAuth} = useAppSelector(state => state.user)
