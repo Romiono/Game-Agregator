@@ -4,7 +4,6 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
-    'plugin:react-Hooks/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
   parser: '@typescript-eslint/parser',
@@ -16,6 +15,5 @@ module.exports = {
     ],
     'semi': ['error', 'always'],
     'comma-dangle': ['error', 'always-multiline'],
-
   },
 }

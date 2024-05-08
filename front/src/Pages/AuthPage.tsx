@@ -1,4 +1,3 @@
-
 import React, {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../Hooks/reduxHooks.ts";
 import {AuthUser} from "../Api/auth/authUser.ts";
@@ -9,8 +8,8 @@ const AuthPage = () => {
 
     const [user, setUser] = useState({
         username: '',
-        password: ''
-    })
+        password: '',
+    });
 
     const {isLoading, error, isAuth} = useAppSelector(state => state.user);
 
@@ -27,12 +26,12 @@ const AuthPage = () => {
         if(isAuth) {
             navigate('/main');
         }
-    }
+    };
 
     const userIsRegistar = (e: React.MouseEvent) => {
         e.preventDefault();
         dispatch(AuthUser.registerNewUser(user));
-    }
+    };
     return (
         <div className={'w-full h-full flex justify-center items-center gap-3'}>
             <button className="btn w-36" onClick={openLogin}>
@@ -115,7 +114,7 @@ const AuthPage = () => {
                 </div>
             </dialog>
         </div>
-    )
+    );
 };
 
 export default AuthPage;

@@ -1,18 +1,18 @@
-import './App.css'
-import './index.css'
+import './App.css';
+import './index.css';
 import {Link, Outlet, useNavigate} from "react-router-dom";
 import {useAppDispatch, useAppSelector} from "./Hooks/reduxHooks.ts";
 import {logout} from "./Store/reducers/UserSlice.ts";
 
 function App() {
-    const {isAuth} = useAppSelector(state => state.user)
+    const {isAuth} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
     const userLogOut = () => {
         dispatch(logout());
         navigate('/login');
-    }
+    };
     return (
         <div className={"w-full h-full flex flex-col"}>
             <div className="navbar bg-base-100">
@@ -59,7 +59,7 @@ function App() {
                 <Outlet/>
             </div>
         </div>
-    )
+    );
 }
 
-export default App
+export default App;

@@ -9,12 +9,12 @@ export class AuthUser {
         try {
             dispatch(pending());
             const {data} = await axios.post(
-                'http://localhost:5027/auth/login',
+                process.env.BASE_URL + '/auth/login',
                 user,
                 {
                     headers: {
-                        'Content-Type': 'application/json'
-                    }
+                        'Content-Type': 'application/json',
+                    },
                 });
             dispatch(login(data.user));
             localStorage.setItem('token', data.user.token);
@@ -24,25 +24,25 @@ export class AuthUser {
         } finally {
             dispatch(pending());
         }
-    }
+    };
 
     static registerNewUser = (user: authUser) => async (dispatch: AppDispatch) => {
         try {
             dispatch(pending());
             await axios.post(
-                'http://localhost:5027/auth/registration',
+                process.env.BASE_URL + '/auth/registration',
                 user,
                 {
                     headers: {
-                        'Content-Type': 'application/json'
-                    }
+                        'Content-Type': 'application/json',
+                    },
                 });
         } catch (e: AxiosError | any) {
-            console.log(e)
+            console.log(e);
             dispatch(pendingIsError(e.message));
         } finally {
             dispatch(pending());
         }
-    }
+    };
 
 }

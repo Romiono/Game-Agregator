@@ -18,7 +18,7 @@ const initialState: UserSlice = {
     isAuth: false,
     isLoading: false,
     error: '',
-}
+};
 
 const UserSlice = createSlice({
     name: 'user',
@@ -45,9 +45,9 @@ const UserSlice = createSlice({
             state.token = null;
             state.isAuth = false;
         },
-    }
+    },
 });
 
-export const {  logout, login, pending, pendingIsError } = UserSlice.actions
+export const {  logout, login, pending, pendingIsError } = UserSlice.actions;
 
-export default UserSlice.reducer
+export default UserSlice.reducer;
