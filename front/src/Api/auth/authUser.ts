@@ -18,9 +18,11 @@ export class AuthUser {
                 });
             dispatch(login(data.user));
             localStorage.setItem('token', data.user.token);
-        } catch (error: AxiosError | any) {
-            dispatch(pendingIsError(error.message));
-            console.log(error);
+        } catch (error) {
+            if (error instanceof AxiosError) {
+                dispatch(pendingIsError(error.message));
+                console.log(error);
+            }
         } finally {
             dispatch(pending());
         }
@@ -37,9 +39,11 @@ export class AuthUser {
                         'Content-Type': 'application/json',
                     },
                 });
-        } catch (e: AxiosError | any) {
-            console.log(e);
-            dispatch(pendingIsError(e.message));
+        } catch (e) {
+            if(e instanceof AxiosError) {
+                console.log(e);
+                dispatch(pendingIsError(e.message));
+            }
         } finally {
             dispatch(pending());
         }
