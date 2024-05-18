@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import mongoose from 'mongoose';
 import authRouter from './routers/authRouter';
 import {corsMiddleware} from "./cors.middleware";
+import userRoutes from "./routers/userRoutes";
 
 dotenv.config();
 
@@ -12,7 +13,8 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(corsMiddleware);
-app.use('/auth', authRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/admin', userRoutes);
 
 
 const serverStart = async () => {

@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "./Hooks/reduxHooks.ts";
 import {logout} from "./Store/reducers/UserSlice.ts";
 
 function App() {
-    const {isAuth} = useAppSelector(state => state.user);
+    const {isAuth, roles} = useAppSelector(state => state.user);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
 
@@ -28,6 +28,9 @@ function App() {
                         {isAuth ?
                             <ul tabIndex={0}
                                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 gap-2">
+                                {roles.includes('ADMIN') &&
+                                    <li><Link to={'/admin'}>Dashboard</Link></li>
+                                }
                                 <li><Link to={'/main'} className="font-bold text-xl">Main</Link></li>
                                 <li><Link to={'/profile'} className="font-bold text-xl">Profile</Link></li>
                                 <li>
@@ -46,6 +49,9 @@ function App() {
                 <div className="navbar-end hidden lg:flex">
                     {isAuth ?
                         <ul className="menu menu-horizontal px-1 flex gap-3">
+                            {roles.includes('ADMIN') &&
+                                <li><Link to={'/admin'} className="font-bold text-xl">Dashboard</Link></li>
+                            }
                             <li><Link to={'/main'} className="font-bold text-xl">Main</Link></li>
                             <li><Link to={'/profile'} className="font-bold text-xl">Profile</Link></li>
                             <li><button onClick={userLogOut} className={'btn'}>Logout</button></li>

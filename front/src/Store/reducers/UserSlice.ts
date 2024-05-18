@@ -3,7 +3,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 export interface UserSlice {
     id: string | null,
     username: string | null,
-    roles: string[] | null,
+    roles: string[],
     token: string | null,
     isAuth: boolean,
     isLoading: boolean,
@@ -41,7 +41,7 @@ const UserSlice = createSlice({
         logout: (state) => {
             state.username = null;
             state.id = null;
-            state.roles = null;
+            state.roles = [];
             state.token = null;
             state.isAuth = false;
         },
@@ -51,3 +51,4 @@ const UserSlice = createSlice({
 export const {  logout, login, pending, pendingIsError } = UserSlice.actions;
 
 export default UserSlice.reducer;
+

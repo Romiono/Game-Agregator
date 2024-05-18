@@ -9,7 +9,7 @@ export class AuthUser {
         try {
             dispatch(pending());
             const {data} = await axios.post(
-                process.env.BASE_URL + '/auth/login',
+                 'http://localhost:5027/api/auth/login',
                 user,
                 {
                     headers: {
@@ -32,7 +32,7 @@ export class AuthUser {
         try {
             dispatch(pending());
             await axios.post(
-                process.env.BASE_URL + '/auth/registration',
+                'http://localhost:5027/api/auth/registration',
                 user,
                 {
                     headers: {
