@@ -22,12 +22,13 @@ const icons = [
 
 const Main = () => {
     return (
-        <div className={"flex flex-col h-full justify-center items-center gap-8 "}>
+        <div className={"flex flex-col h-full justify-center items-center gap-8"}>
             
             <h4 className={"text-4xl "}>Features</h4>
 
             <div className={"grid grid-cols-4 gap-4"}> 
                 {icons.map((icon, index) => <IconBlock src={icon.src} name={icon.name} key = {index} />)}
+                
             </div>
         </div>
     );
