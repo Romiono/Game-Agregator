@@ -2,7 +2,6 @@ import Router from 'express';
 import authController from "../controllers/authController";
 import {check} from "express-validator";
 
-
 const authRouter = Router();
 
 authRouter.post('/registration', [
@@ -10,6 +9,6 @@ authRouter.post('/registration', [
     check('password', 'Пароль слишком простой').isLength({min: 8})
 ], authController.registration);
 authRouter.post('/login', authController.login);
-authRouter.get('/users', authController.getUsers);
-
+authRouter.patch('/user/username/:id', authController.updateUsername);
+authRouter.patch('/user/password/:id', authController.updatePassword);
 export default authRouter;

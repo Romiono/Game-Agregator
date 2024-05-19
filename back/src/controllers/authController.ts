@@ -4,8 +4,9 @@ import bcrypt from "bcryptjs"
 import {validationResult} from "express-validator";
 import {sign} from "jsonwebtoken";
 import secretKey from "../config";
+import {Request, Response} from "express";
 
-const generateAccessToken = (id: any, roles: any) => {
+const generateAccessToken = (id: unknown, roles: string[]) => {
     const payload = {
         id,
         roles
@@ -15,7 +16,7 @@ const generateAccessToken = (id: any, roles: any) => {
 }
 
 class authController {
-    async registration(req: any, res: any) {
+    async registration(req: Request, res: Response) {
         try {
             const errors = validationResult(req);
             if (!errors.isEmpty()) {
@@ -38,7 +39,7 @@ class authController {
         }
     }
 
-    async login(req: any, res: any) {
+    async login(req: Request, res: Response) {
         try {
             const {username, password} = req.body;
             const user = await User.findOne({username});
@@ -64,14 +65,60 @@ class authController {
         }
     }
 
-    async getUsers(req: any, res: any) {
+    async updateUsername (req: Request, res: Response): Promise<void>  {
         try {
-            res.json('server work')
-        } catch (e) {
-            console.log(e);
-            res.status(400).json({message: 'get users error'});
+            const userId = req.params.id;
+            const { username } = req.body;
+
+            if (!username) {
+                res.status(400).json({ message: 'Username is required' });
+                return;
+            }
+
+            const existingUser = await User.findOne({ username }).exec();
+            if (existingUser && existingUser._id.toString() !== userId) {
+                res.status(400).json({ message: 'Username is already taken' });
+                return;
+            }
+
+            const updatedUser = await User.findByIdAndUpdate(userId, { username }, { new: true }).exec();
+
+            if (!updatedUser) {
+                res.status(404).json({ message: 'User not found' });
+                return;
+            }
+
+            res.status(200).json({ message: 'Username updated successfully', user: updatedUser });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server Error' });
         }
-    }
+    };
+
+    async updatePassword (req: Request, res: Response): Promise<void>  {
+        try {
+            const userId = req.params.id;
+            const { password } = req.body;
+
+            if (!password) {
+                res.status(400).json({ message: 'Password is required' });
+                return;
+            }
+            const hashPassword = bcrypt.hashSync(password, 7);
+            const updatedUser = await User.findByIdAndUpdate(userId, { password: hashPassword }, { new: true }).exec();
+
+            if (!updatedUser) {
+                res.status(404).json({ message: 'User not found' });
+                return;
+            }
+
+            res.status(200).json({ message: 'Password updated successfully', user: updatedUser });
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ message: 'Server Error' });
+        }
+    };
+
 }
 
 export default new authController();

@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {AdminApi} from "../Api/admin/adminApi.ts";
+import {AdminApi} from "../Api/admin/AdminApi.ts";
 import {useAppSelector} from "../Hooks/reduxHooks.ts";
 import {useNavigate} from "react-router-dom";
 

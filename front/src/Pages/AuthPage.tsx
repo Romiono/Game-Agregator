@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useAppDispatch, useAppSelector} from "../Hooks/reduxHooks.ts";
-import {AuthUser} from "../Api/auth/authUser.ts";
+import {AuthUser} from "../Api/auth/AuthUser.ts";
 import {useNavigate} from "react-router-dom";
 import Loader from "../Componets/UI/Loader.tsx";
 
