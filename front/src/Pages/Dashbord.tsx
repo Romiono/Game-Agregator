@@ -15,8 +15,8 @@ const Dashbord = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(!isAdmin()) {
-            navigate('main')
+        if (!isAdmin()) {
+            navigate('main');
         } else {
             fetchAllUsers();
         }
@@ -26,11 +26,11 @@ const Dashbord = () => {
         const response: IUser[] = await AdminApi.fetchUsers();
         console.log(response);
         setUsers(response);
-    }
+    };
 
     const isAdmin = () => {
-        return role.includes('ADMIN')
-    }
+        return role.includes('ADMIN');
+    };
 
     const handleDelete = async (id: string) => {
         await AdminApi.ban(id);
@@ -54,7 +54,11 @@ const Dashbord = () => {
                             <th>{user._id}</th>
                             <td>{user.username}</td>
                             <td>{user.roles}</td>
-                            <td><button onClick={() => handleDelete(user._id)} className={'btn btn-error btn-outline'}>Delete</button></td>
+                            <td>
+                                <button onClick={() => handleDelete(user._id)}
+                                        className={'btn btn-error btn-outline'}>Delete
+                                </button>
+                            </td>
                         </tr>)}
                     </tbody>
                 </table>
