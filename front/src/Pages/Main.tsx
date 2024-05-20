@@ -17,7 +17,7 @@ const icons = [
     {src: reduxImg, name:"redux"},
     {src: threeImg, name:"three"},
     {src: tsImg, name:"ts"},
-]
+];
 
 
 const Main = () => {
