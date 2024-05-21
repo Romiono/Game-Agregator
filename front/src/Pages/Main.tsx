@@ -1,12 +1,12 @@
 import IconBlock from "../Componets/UI/icon_block";
-import expressImg from "../assets/images/png/express.png";
-import reactImg from "../assets/images/png/react.png";
-import jwtImg from "../assets/images/png/jwt.png";
-import mongoImg from "../assets/images/png/mongo.png";
-import nodeImg from "../assets/images/png/node.png";
-import reduxImg from "../assets/images/png/redux.png";
-import threeImg from "../assets/images/png/three.png";
-import tsImg from "../assets/images/png/ts.png";
+import expressImg from "../Assets/images/png/express.png";
+import reactImg from "../Assets/images/png/react.png";
+import jwtImg from "../Assets/images/png/jwt.png";
+import mongoImg from "../Assets/images/png/mongo.png";
+import nodeImg from "../Assets/images/png/node.png";
+import reduxImg from "../Assets/images/png/redux.png";
+import threeImg from "../Assets/images/png/three.png";
+import tsImg from "../Assets/images/png/ts.png";
 
 const icons = [
     {src: expressImg, name:"express"},
