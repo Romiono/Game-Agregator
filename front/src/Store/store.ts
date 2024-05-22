@@ -1,9 +1,10 @@
 import {combineReducers, configureStore} from "@reduxjs/toolkit";
 import UserReducer from "./reducers/UserSlice.ts";
+import GameReducer from "./reducers/GameSlice.ts";
 
 const rootReducer = combineReducers({
-
     user: UserReducer,
+    game: GameReducer
 });
 
 

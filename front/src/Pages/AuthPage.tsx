@@ -21,10 +21,13 @@ const AuthPage = () => {
     const openLogin = () => document.getElementById('my_modal_2').showModal();
 
     const userIsLogining =  (e: React.MouseEvent) => {
-        e.preventDefault();
-        dispatch(AuthUser.auth(user));
-        if(isAuth) {
-            navigate('/main');
+        try {
+            e.preventDefault();
+            dispatch(AuthUser.auth(user));
+        } finally {
+            if(isAuth) {
+                navigate('/main');
+            }
         }
     };
 

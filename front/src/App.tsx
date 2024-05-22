@@ -32,6 +32,7 @@ function App() {
                                     <li><Link to={'/admin'}>Dashboard</Link></li>
                                 }
                                 <li><Link to={'/main'} className="font-bold text-xl">Main</Link></li>
+                                <li><Link to={'/games'} className="font-bold text-xl">Games</Link></li>
                                 <li><Link to={'/profile'} className="font-bold text-xl">Profile</Link></li>
                                 <li>
                                     <button onClick={userLogOut} className={'btn'}>Logout</button>
@@ -53,8 +54,11 @@ function App() {
                                 <li><Link to={'/admin'} className="font-bold text-xl">Dashboard</Link></li>
                             }
                             <li><Link to={'/main'} className="font-bold text-xl">Main</Link></li>
+                            <li><Link to={'/games'} className="font-bold text-xl">Games</Link></li>
                             <li><Link to={'/profile'} className="font-bold text-xl">Profile</Link></li>
-                            <li><button onClick={userLogOut} className={'btn'}>Logout</button></li>
+                            <li>
+                                <button onClick={userLogOut} className={'btn'}>Logout</button>
+                            </li>
                         </ul>
                         :
                         <Link to={'/login'} className="btn">Login</Link>
